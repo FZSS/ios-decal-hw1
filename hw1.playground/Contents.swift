@@ -26,7 +26,7 @@ class Words {
 
 
 //: ## Q2: Variable Types and Function Types
-    func arePalindromes(words: [String]) -> Bool {
+    class func arePalindromes(words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reverse())}
         let numElements = words.count
         
@@ -35,20 +35,21 @@ class Words {
                 return false
             }
         }
+        return true
     }
 //: ### Why does the compiler dislike the **for loop**? Fix it.
 //: ### What else is wrong with this function? You may have to refer to (but **not**
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: Because declaring a variable with **let** making it an immutable constant. This function also does not return **true** at the end.
+//: Because declaring a variable with **let** making it an immutable constant. This function also does not return **true** at the end. Also, the function should be static, because it is not called on a instance.
 
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int]?
-        var lenA = self.wordA.characters.count
-        var lenB = self.wordB.characters.count
+    func isAnagram() -> Bool {
+        var countLetters = [Character : Int]()
+        let lenA = self.wordA.characters.count
+        let lenB = self.wordB.characters.count
         
         if lenA != lenB {
             return false
@@ -75,12 +76,11 @@ class Words {
             }
         }
         
-        for (letter, count) in countLetters {
+        for (_, count) in countLetters {
             if count != 0 {
                 return false
             }
         }
-        
         return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
@@ -89,7 +89,7 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: The final return value should be **true** for a **bool** type
+//: The instantiation is incorrect. The final return value should be **true** for a **bool** type. Also, this function should not be a class function, because it uses instance variables, e.g. self.wordA. Meanwhle, letA, letB could be constant, letter could be replaced with _.
     
     
 }
